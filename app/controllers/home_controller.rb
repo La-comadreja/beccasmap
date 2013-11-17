@@ -9,7 +9,7 @@ class HomeController < ApplicationController
     
     @dates.each do |d|
       if d.to_s.include? "Week of"
-        @cal = d.to_s.split("<font class=\"flarge\"><b>")
+        @cal = d.to_s.split("<font class=\"flarge\"><b>")[2]
         break
       end
     end
