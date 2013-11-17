@@ -27,9 +27,15 @@ function initialize() {
     new google.maps.LatLng(40.713, -74.004),
     new google.maps.LatLng(40.757, -73.984));
   map.fitBounds(defaultBounds);
+
+  var marker = new google.maps.Marker({ 
+    position: new google.maps.LatLng(40.73, -73.994),
+    map: map,
+    title: "Test marker"
+  }); 
 }
 
-function codeAddress(var address) {
+function codeAddress(address) {
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       return results[0].geometry.location;
