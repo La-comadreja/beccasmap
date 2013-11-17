@@ -13,11 +13,12 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script>
 var map;
+var geocoder;
 var markers = [];
 
 function initialize() {
+  geocoder = new google.maps.Geocoder();
   var mapOptions = {
-    zoom: 8,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -26,6 +27,16 @@ function initialize() {
     new google.maps.LatLng(40.713, -74.004),
     new google.maps.LatLng(40.757, -73.984));
   map.fitBounds(defaultBounds);
+}
+
+function codeAddress(var address) {
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      return results[0].geometry.location;
+    } else {
+      return null;
+    }
+  });
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
