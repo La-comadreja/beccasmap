@@ -6,6 +6,7 @@ require 'rubygems'
 gem 'rails', '4.0.0'
 ruby '2.0.0'
 
+gem 'gon'
 gem 'nokogiri'
 gem 'rails_12factor'
 
