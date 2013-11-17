@@ -3,16 +3,12 @@ class HomeController < ApplicationController
   end
 
   def locations
-    page = Nokogiri::HTML(open("app/views/home/garysguide.html"))
-    #page = Nokogiri::HTML(open(URI.escape("http://www.garysguide.com/events")))
- 
-    @dates = page.css(".boxx") 
-    cal = ""
+    page = Nokogiri::HTML(open("app/views/home/garysguide.html")) 
+    @dates = page.css(".boxx")
+    @cal = "Week of"
+    
     @dates.each do |d|
-      if d.include? "Week of"
-        cal = d
-        break
-      end
+      cal = d if d.include? "Week of"
     end
   end
 end
