@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+require 'open-uri'
+require 'rubygems'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
