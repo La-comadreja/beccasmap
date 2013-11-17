@@ -5,10 +5,13 @@ class HomeController < ApplicationController
   def locations
     page = Nokogiri::HTML(open("app/views/home/garysguide.html")) 
     @dates = page.css(".boxx")
-    @cal = "Week of"
+    @cal = "THIS DOESNT WORK"
     
     @dates.each do |d|
-      cal = d if d.include? "Week of"
+      if d.to_s.include? "Week of"
+        @cal = d
+        break
+      end
     end
   end
 end
