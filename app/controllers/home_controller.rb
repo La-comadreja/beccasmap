@@ -4,12 +4,12 @@ class HomeController < ApplicationController
 
   def locations
     page = Nokogiri::HTML(open("app/views/home/garysguide.html")) 
-    @dates = page.css(".boxx")
-    @cal = "THIS DOESNT WORK"
+    @sections = page.css(".boxx")
+    @day = "THIS DOESNT WORK"
     
-    @dates.each do |d|
-      if d.to_s.include? "Week of"
-        @cal = d.to_s.split("<font class=\"flarge\"><b>")[2]
+    @sections.each do |s|
+      if s.to_s.include? "Week of"
+        @day = s.to_s.split("<font class=\"flarge\"><b>")[2]
         break
       end
     end
