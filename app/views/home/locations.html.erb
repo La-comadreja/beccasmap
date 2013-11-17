@@ -1,2 +1,4 @@
 <h1>Home#locations</h1>
-<%= @day %>
+<% for j in 0..@i %>
+  <%= @places[j].text %><br /><br />
+<% end %>
