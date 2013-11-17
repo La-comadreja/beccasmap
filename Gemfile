@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 ruby '2.0.0'
 
+gem 'nokogiri'
 gem 'rails_12factor'
 
 # Use pg as the database for Active Record

@@ -6,4 +6,9 @@ class HomeControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should get locations" do
+    get :locations
+    assert_response :success
+  end
+
 end
