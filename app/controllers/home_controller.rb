@@ -1,5 +1,9 @@
 class HomeController < ApplicationController
   def index
+#    locations
+#    for j in 0..@i
+#      @places[j].text.split(", ")[1] + ", New York"
+#    end
   end
 
   def locations
