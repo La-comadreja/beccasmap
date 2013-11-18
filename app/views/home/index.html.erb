@@ -28,9 +28,7 @@ function initialize() {
     new google.maps.LatLng(40.757, -73.984));
   map.fitBounds(defaultBounds);
 
-  codeAddress("371 West Broadway, New York");
-  codeAddress("71 Pineapple Street, New York");
-  codeAddress(gon.locs[0]);
+  for (var i = 0; i < gon.locs.length; i++) codeAddress(gon.locs[i]);
 }
 
 function codeAddress(address) {

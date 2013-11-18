@@ -5,10 +5,10 @@ class HomeController < ApplicationController
     for j in 0..@places.length
       @loc = @places[j].to_s.split(", ")
       if @loc.length > 1
-        @locs.push(@loc[1] + ", New York")
+        @locs.push(@loc[1].split("</font>")[0] + ", New York")
       end
     end
-    gon.locs(@locs)
+    gon.locs = @locs
   end
 
   def locations
@@ -32,6 +32,6 @@ class HomeController < ApplicationController
     if @i > -1
       return @places[0..@i]
     end
-    0
+    return [""]
   end
 end
