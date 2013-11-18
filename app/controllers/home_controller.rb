@@ -44,10 +44,10 @@ class HomeController < ApplicationController
     i = 0
     html_string.each do |s|
       if i == 1
-        if s.to_s.include? "<td align=\"left\" colspan=\"7\"><hr style=\"border:0; color:"
+        if s.to_s.include? "<td align=\"center\" valign=\"top\" width=\"48\">"
           @info.push(s.to_s)
-        elsif (s.to_s.include? "width=\"100%\"")
-        else
+        elsif (s.to_s.include? "width=\"100%\"" or s.to_s.include? "<hr style=\"border:0; color:" or s.to_s.include? "<font class=\"flarge\"><b>")
+        elsif @info.length > 0
           @info[@info.length-1] += s.to_s
         end
       end
