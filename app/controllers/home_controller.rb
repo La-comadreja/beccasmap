@@ -42,16 +42,22 @@ class HomeController < ApplicationController
   def extract(html_string)
     @info = []
     i = 0
-    html_string.each do |s|
-      if i == 1
-        if s.to_s.include? "<td align=\"center\" valign=\"top\" width=\"48\">"
-          @info.push(s.to_s)
-        elsif (s.to_s.include? "width=\"100%\"" or s.to_s.include? "<hr style=\"border:0; color:" or s.to_s.include? "<font class=\"flarge\"><b>")
-        elsif @info.length > 0
-          @info[@info.length-1] += s.to_s
+    html_string.each do |str|
+      s = str.to_s
+      if i == 1 or i == -1
+        if s.include? "<td align=\"center\" valign=\"top\" width=\"48\">"
+          @info.push(s)
+        elsif s.include? "<font class=\"freg\">" and !s.include? ", "
+          @info.pop
+          i = -1
+        elsif s.include? "<hr style=\"border:0; color:"
+          i = 1
+        elsif s.include? "width=\"100%\"" or s.include? "<font class=\"flarge\"><b>" or s.include? "<td align=\"left\" colspan=\"7\" class=\"fsmall\">"
+        elsif @info.length > 0 && i == 1
+          @info[@info.length-1] += s
         end
       end
-      i += 1 if s.to_s.include? "<td align=\"left\" colspan=\"7\"><font class=\"flarge\">"
+      i += 1 if s.include? "<td align=\"left\" colspan=\"7\"><font class=\"flarge\">"
     end
     gon.info = @info
   end
