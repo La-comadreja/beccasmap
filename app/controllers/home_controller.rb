@@ -12,16 +12,11 @@ class HomeController < ApplicationController
   end
 
   def locations
-    page = Nokogiri::HTML(open("app/views/home/garysguide.html")) 
-    @sections = page.css(".boxx")
+    s = weekly_info
+    @day = s.to_s.split("<font class=\"flarge\"><b>")[2]
+    @info = s.css("td td")
+    @places = s.css(".freg")
     @i = -1
-    @sections.each do |s|
-      if s.to_s.include? "Week of"
-        @day = s.to_s.split("<font class=\"flarge\"><b>")[2]
-        @places = s.css(".freg")
-        break
-      end
-    end
     @places.each do |p|
       if @day.include? p.to_s
         @i += 1
@@ -33,5 +28,14 @@ class HomeController < ApplicationController
       return @places[0..@i]
     end
     return [""]
+  end
+
+  def weekly_info
+    page = Nokogiri::HTML(open("app/views/home/garysguide.html"))
+    @sections = page.css(".boxx")
+    @sections.each do |s|
+      return s if s.to_s.include? "Week of"
+    end
+    return nil
   end
 end

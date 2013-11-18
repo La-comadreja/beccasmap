@@ -1,6 +1,3 @@
-<% for j in 0..@i %>
-  <% loc = @places[j].text.split(", ") %>
-  <% if loc.length > 1 %>
-    <p class="location"><%= loc[1] + ", New York" %><br /><br /></p>
-  <% end %>
+<% @info.each do |i| %>
+  <p><%= i.text %><br /></p>
 <% end %>
