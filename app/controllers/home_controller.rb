@@ -14,7 +14,7 @@ class HomeController < ApplicationController
   def locations
     s = weekly_info
     @day = s.to_s.split("<font class=\"flarge\"><b>")[2]
-    @info = s.css("td td")
+    extract(s.css("td td"))
     @places = s.css(".freg")
     @i = -1
     @places.each do |p|
@@ -37,5 +37,22 @@ class HomeController < ApplicationController
       return s if s.to_s.include? "Week of"
     end
     return nil
+  end
+
+  def extract(html_string)
+    @info = []
+    i = 0
+    html_string.each do |s|
+      if i == 1
+        if s.to_s.include? "<td align=\"left\" colspan=\"7\"><hr style=\"border:0; color:"
+          @info.push(s.to_s)
+        elsif (s.to_s.include? "width=\"100%\"")
+        else
+          @info[@info.length-1] += s.to_s
+        end
+      end
+      i += 1 if s.to_s.include? "<td align=\"left\" colspan=\"7\"><font class=\"flarge\">"
+    end
+    gon.info = @info
   end
 end
