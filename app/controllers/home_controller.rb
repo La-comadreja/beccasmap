@@ -54,6 +54,9 @@ class HomeController < ApplicationController
           i = 1
         elsif s.include? "width=\"100%\"" or s.include? "<font class=\"flarge\"><b>" or s.include? "<td align=\"left\" colspan=\"7\" class=\"fsmall\">"
         elsif @info.length > 0 && i == 1
+          if !s["><b>"].nil?
+            s["><b>"] = " target=\"_blank\"><b>"
+          end
           @info[@info.length-1] += s
         end
       end
