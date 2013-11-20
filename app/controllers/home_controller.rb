@@ -5,7 +5,15 @@ class HomeController < ApplicationController
     for j in 0..@places.length
       p = @places[j].to_s.split(", ")
       if p.length > 1
-        @locs.push(p[1].split("</font>")[0] + ", New York")
+        boro = ", New York"
+        if p.length > 2
+          boro = ", Brooklyn" + boro if p[p.length - 1].include? "Brooklyn"
+          boro = ", Manhattan" + boro if p[p.length - 1].include? "Manhattan"
+          boro = ", Queens" + boro if p[p.length - 1].include? "Queens"
+          boro = ", Bronx" + boro if p[p.length - 1].include? "Bronx"
+          boro = ", Hoboken, New Jersey" if p[p.length - 1].include? "Hoboken"
+        end
+        @locs.push(p[1].split("</font>")[0] + boro)
       end
     end
     gon.locs = @locs
