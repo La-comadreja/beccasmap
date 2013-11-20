@@ -28,8 +28,9 @@ function initialize() {
     new google.maps.LatLng(40.757, -73.984));
   map.fitBounds(defaultBounds);
 
-  for (var i = 0; i < gon.locs.length; i++)
+  for (var i = 0; i < gon.locs.length; i++) {
     codeAddress(gon.locs[i], i);
+  }
 }
 
 function codeAddress(address, i) {

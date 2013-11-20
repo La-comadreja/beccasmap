@@ -3,9 +3,9 @@ class HomeController < ApplicationController
     @places = locations
     @locs = []
     for j in 0..@places.length
-      @loc = @places[j].to_s.split(", ")
-      if @loc.length > 1
-        @locs.push(@loc[1].split("</font>")[0] + ", New York")
+      p = @places[j].to_s.split(", ")
+      if p.length > 1
+        @locs.push(p[1].split("</font>")[0] + ", New York")
       end
     end
     gon.locs = @locs
@@ -13,7 +13,13 @@ class HomeController < ApplicationController
 
   def locations
     s = weekly_info
-    @day = s.to_s.split("<font class=\"flarge\"><b>")[2]
+    @days = s.to_s.split("<font class=\"flarge\"><b>")
+    @days.each do |d|
+      if d.include? "<td align=\"center\" width=\"25\""
+        @day = d
+        break
+      end
+    end
     extract(s.css("td td"))
     @places = s.css(".freg")
     @i = -1
@@ -34,7 +40,7 @@ class HomeController < ApplicationController
     page = Nokogiri::HTML(open("app/views/home/garysguide.html"))
     @sections = page.css(".boxx")
     @sections.each do |s|
-      return s if s.to_s.include? "Week of"
+      return s if s.to_s.include? "<td align=\"center\" width=\"25\""
     end
     return nil
   end
