@@ -29,13 +29,13 @@ function initialize() {
   map.fitBounds(defaultBounds);
 
   for (var i = 0; i < gon.locs.length; i++) {
-    codeAddress(gon.locs[i], i, 0);
+    codeAddress(gon.locs[i], i);
   }
 }
 
-function codeAddress(address, i, count) {
+function codeAddress(address, i) {
   geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK && count < 10) {
+    if (status == google.maps.GeocoderStatus.OK) {
       var marker = new google.maps.Marker({
           map: map,
           position: results[0].geometry.location
@@ -45,7 +45,7 @@ function codeAddress(address, i, count) {
       });
     }
     else {
-      codeAddress(address, i, count + 1);
+      //Only some of the pins are appearing--why?
     }
   });
 }
