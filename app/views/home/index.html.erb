@@ -29,13 +29,13 @@ function initialize() {
   map.fitBounds(defaultBounds);
 
   for (var i = 0; i < gon.locs.length; i++) {
-    codeAddress(gon.locs[i], i);
+    codeAddress(gon.locs[i], i, 0);
   }
 }
 
-function codeAddress(address, i) {
+function codeAddress(address, i, count) {
   geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
+    if (status == google.maps.GeocoderStatus.OK && count < 10) {
       var marker = new google.maps.Marker({
           map: map,
           position: results[0].geometry.location
@@ -45,7 +45,7 @@ function codeAddress(address, i) {
       });
     }
     else {
-      alert(address);
+      codeAddress(address, i, count + 1);
     }
   });
 }
