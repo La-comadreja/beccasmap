@@ -45,8 +45,10 @@ function codeAddress(address, i) {
       });
     }
     else {
-      //Only some of the pins are appearing--why?
-      alert(status + " WITH " + address);
+      if status == "OVER_QUERY_LIMIT" {
+        alert(Too many events to handle right now!  Getting the rest...);
+        time.sleep(2);
+      }
     }
   });
 }
