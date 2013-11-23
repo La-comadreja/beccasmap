@@ -45,8 +45,8 @@ function codeAddress(address, i) {
       });
     }
     else {
-      if status == "OVER_QUERY_LIMIT" {
-        alert(Too many events to handle right now!  Getting the rest...);
+      if (status === "OVER_QUERY_LIMIT") {
+        alert("So many events, Google can't handle them all at once!  Getting the rest...");
         time.sleep(2);
       }
     }
