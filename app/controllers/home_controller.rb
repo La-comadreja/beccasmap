@@ -58,7 +58,6 @@ class HomeController < ApplicationController
       @home.html = doc_string
       @home.lastview = @time
       @home.save
-      doc_string =
     end
 
     page = Nokogiri::HTML(doc_string)
