@@ -47,9 +47,13 @@ class HomeController < ApplicationController
   def weekly_info
     @time = Time.now
     @savedtime = nil
-#    if @Home.last.nil?
-#      @savedtime = @Homes.last.lastview
-#    end
+    if Home.last
+      @savedtime = Home.last.lastview
+    else
+      @home = Home.new
+      @home.lastview = @time
+      @home.save
+    end
 
     page = Nokogiri::HTML(open("app/views/home/garysguide.html"))
     @sections = page.css(".boxx")
