@@ -11,5 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131128183618) do
+ActiveRecord::Schema.define(version: 20131128220255) do
+
+  create_table "homes", force: true do |t|
+    t.text     "html"
+    t.boolean  "lastview_changed_at"
+    t.datetime "lastview"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 end
