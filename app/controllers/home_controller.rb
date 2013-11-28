@@ -46,7 +46,9 @@ class HomeController < ApplicationController
 
   def weekly_info
     @time = Time.now.utc
+    doc_string = ""
     if Home.last
+      doc_string = Home.last.html
       @savedtime = Home.last.lastview
       @daysbetween = (@savedtime.to_date - @time.to_date).floor
       Home.last.destroy if @daysbetween > 1 || (@daysbetween == 1 && @time.hour >= 3) || (@savedtime.hour < 3 && @time.hour >= 3)
@@ -55,10 +57,10 @@ class HomeController < ApplicationController
       @home.html = Nokogiri::HTML(open(URI.escape("http://www.garysguide.com/events.html"))).to_s
       @home.lastview = @time
       @home.save
+      doc_string = Home.last.html
     end
 
-    doc_string = Home.last.html
-    page = Nokogiri::HTML(Home.last.html)
+    page = Nokogiri::HTML(doc_string)
     @sections = page.css(".boxx")
     @sections.each do |s|
       return s if s.to_s.include? "<td align=\"center\" width=\"25\""
