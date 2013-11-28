@@ -50,8 +50,8 @@ function codeAddress(address, i) {
     }
     else {
       if (status == "OVER_QUERY_LIMIT") {
-        setTimeout(function(){}, 2000);
-        return false;
+        setTimeout(function(){ codeAddress(address, i); }, 2013);
+        return status == google.maps.GeocoderStatus.OK;
       }
     }
   });
