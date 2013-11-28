@@ -15,6 +15,7 @@
 var map;
 var geocoder;
 var markers = [];
+var infoWindows = new Array(gon.locs.length);
 
 function initialize() {
   geocoder = new google.maps.Geocoder();
@@ -53,12 +54,15 @@ function codeAddress(address, i) {
 }
 
 function infoWindow(i) {
-  var contentString = '<div id="content">'+
-      gon.info[i]+
-      '</div>';
-  return new google.maps.InfoWindow({
-      content: contentString
-  });
+  if (!infoWindows[i]) {
+    var contentString = '<div id="content">'+
+        gon.info[i]+
+        '</div>';
+    infoWindows[i] = new google.maps.InfoWindow({
+        content: contentString
+    });
+  }
+  return infoWindows[i];
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
