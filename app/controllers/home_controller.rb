@@ -53,11 +53,12 @@ class HomeController < ApplicationController
       @daysbetween = (@savedtime.to_date - @time.to_date).floor
       Home.last.destroy if @daysbetween > 1 || (@daysbetween == 1 && @time.hour >= 3) || (@savedtime.hour < 3 && @time.hour >= 3)
     else
+      doc_string = Nokogiri::HTML(open(URI.escape("http://www.garysguide.com/events.html"))).to_s
       @home = Home.new
-      @home.html = Nokogiri::HTML(open(URI.escape("http://www.garysguide.com/events.html"))).to_s
+      @home.html = doc_string
       @home.lastview = @time
       @home.save
-      doc_string = Home.last.html
+      doc_string =
     end
 
     page = Nokogiri::HTML(doc_string)
