@@ -30,7 +30,10 @@ function initialize() {
   map.fitBounds(defaultBounds);
 
   for (var i = 0; i < gon.locs.length; i++) {
-    codeAddress(gon.locs[i], i);
+    var j = 0;
+    while (!codeAddress(gon.locs[i], i) && j < 3) {
+       j++;
+    }
   }
 }
 
@@ -46,11 +49,13 @@ function codeAddress(address, i) {
       });
     }
     else {
-      /*if (status === "OVER_QUERY_LIMIT") {
-        time.sleep(2);
-      }*/
+      if (status == "OVER_QUERY_LIMIT") {
+        setTimeout(function(){}, 2000);
+        return false;
+      }
     }
   });
+  return true;
 }
 
 function infoWindow(i) {
