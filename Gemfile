@@ -8,6 +8,7 @@ ruby '2.0.0'
 
 gem 'gon'
 gem 'nokogiri'
+gem 'protected_attributes'
 gem 'rails_12factor'
 
 # Use pg as the database for Active Record
