@@ -50,8 +50,7 @@ class HomeController < ApplicationController
     if Home.last
       doc_string = Home.last.html
       @savedtime = Home.last.lastview
-      @daysbetween = (@savedtime.to_date - @time.to_date).floor
-      Home.last.destroy if @daysbetween > 1 || (@daysbetween == 1 && @time.hour >= 3) || (@savedtime.hour < 3 && @time.hour >= 3)
+      Home.last.destroy if (@time.to_date - @savedtime.to_date).round != 0 || @time.hour - @savedtime.hour != 0
     else
       doc_string = Nokogiri::HTML(open(URI.escape("http://www.garysguide.com/events.html"))).to_s
       @home = Home.new
