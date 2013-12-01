@@ -11,3 +11,9 @@
  *= require_self
  *= require_tree .
  */
+.topmenubar {
+  color:yellow;
+  font-family:copperplate;
+  font-size:30px;
+  font-weight:bold;
+}

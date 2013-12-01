@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <style type="text/css">
       html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-      #map-canvas { height: 100%; }
+      body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
+      #map-canvas { height: 100%; overflow: auto; }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script>
@@ -85,6 +85,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </script>
   </head>
   <body>
+    <div class="topmenubar" style="position:relative;background:maroon;height:40px;">
+      <div id="menupadding" style="position:relative;left:30px;right:30px;">
+        <table style="width:100%;overflow:auto;">
+          <tr>
+            <font class="headerfont">
+              <td>BeccasMap.com</td>
+              <td style="text-align:right;position:relative;right:60px;">Best upcoming Tech events in NYC</td>
+            </font>
+          </tr>
+        </table>
+      </div>
+    </div>
     <div id="map-canvas"></div>
   </body>
 </html>
