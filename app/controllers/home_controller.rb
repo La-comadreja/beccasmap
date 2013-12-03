@@ -6,20 +6,16 @@ class HomeController < ApplicationController
       p = @places[j].to_s.split(", ")
       if p.length > 1
         boro = ", New York"
-        if p.length > 2
-          if p[p.length - 1].include? "Bronx"
-            boro = ", Bronx" + boro
-          elsif p[p.length - 1].include? "Brooklyn"
-            boro = ", Brooklyn" + boro
-          elsif p[p.length - 1].include? "Hoboken"
-            boro = ", Hoboken, New Jersey"
-          elsif p[p.length - 1].include? "Manhattan"
-            boro = ", Manhattan" + boro
-          elsif p[p.length - 1].include? "Queens"
-            boro = ", Queens" + boro
-          else
-            boro = ", Manhattan" + boro
-          end
+        if p[p.length - 1].include? "Bronx"
+          boro = ", Bronx" + boro
+        elsif p[p.length - 1].include? "Brooklyn"
+          boro = ", Brooklyn" + boro
+        elsif p[p.length - 1].include? "Hoboken"
+          boro = ", Hoboken, New Jersey"
+        elsif p[p.length - 1].include? "Queens"
+          boro = ", Queens" + boro
+        else
+          boro = ", Manhattan" + boro
         end
         @locs.push(p[1].split("</font>")[0] + boro)
       end
@@ -95,6 +91,7 @@ class HomeController < ApplicationController
           end
           @info[@info.length-1] += s
         end
+        @info.pop if @info.length > 0 and @info[@info.length-1].include? "To be decided"
       end
       i += 1 if s.include? "<td align=\"left\" colspan=\"7\"><font class=\"flarge\">"
     end
