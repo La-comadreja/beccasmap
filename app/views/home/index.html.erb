@@ -43,7 +43,7 @@ function codeAddress(address, i) {
           map: map,
           position: results[0].geometry.location
       });
-      google.maps.event.addListener(marker, 'mouseover', function() {
+      google.maps.event.addListener(marker, 'click', function() {
         infoWindow(i).open(map, marker);
       });
     }
