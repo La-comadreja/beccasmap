@@ -91,7 +91,7 @@ class HomeController < ApplicationController
           end
           @info[@info.length-1] += s
         end
-        @info.pop if @info.length > 0 and @info[@info.length-1].include? "To be decided"
+        @info.pop if @info.length > 0 and (@info[@info.length-1].include? "ecided" or @info[@info.length-1].include? "TBD")
       end
       i += 1 if s.include? "<td align=\"left\" colspan=\"7\"><font class=\"flarge\">"
     end
