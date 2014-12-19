@@ -1,5 +1,9 @@
 class HomeController < ApplicationController
   def index
+    home = Home.new
+  end
+  
+=begin
     @places = locations
     @locs = []
     for j in 0..@places.length
@@ -48,29 +52,6 @@ class HomeController < ApplicationController
     return [""]
   end
 
-  def weekly_info
-    @time = Time.now.utc
-    doc_string = ""
-    if Home.last
-      doc_string = Home.last.html
-      @savedtime = Home.last.lastview
-      Home.last.destroy if (@time.to_date - @savedtime.to_date).round != 0 || @time.hour - @savedtime.hour != 0
-    else
-      doc_string = Nokogiri::HTML(open(URI.escape("http://www.garysguide.com/events.html"))).to_s
-      @home = Home.new
-      @home.html = doc_string
-      @home.lastview = @time
-      @home.save
-    end
-
-    page = Nokogiri::HTML(doc_string)
-    @sections = page.css(".boxx")
-    @sections.each do |s|
-      return s if s.to_s.include? "<td align=\"center\" width=\"25\""
-    end
-    return nil
-  end
-
   def extract(html_string)
     @info = []
     i = 0
@@ -97,4 +78,5 @@ class HomeController < ApplicationController
     end
     gon.info = @info
   end
+=end
 end

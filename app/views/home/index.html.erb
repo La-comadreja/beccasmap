@@ -13,7 +13,7 @@
 var map;
 var geocoder;
 var markers = [];
-var infoWindows = new Array(gon.locs.length);
+//var infoWindows = new Array(gon.locs.length);
 
 function initialize() {
   geocoder = new google.maps.Geocoder();
@@ -27,7 +27,7 @@ function initialize() {
     new google.maps.LatLng(40.7, -73.984),
     new google.maps.LatLng(40.765, -73.984));
   map.fitBounds(defaultBounds);
-
+/*
   for (var i = 0; i < gon.locs.length; i++) {
     var j = 0;
     while (!codeAddress(gon.locs[i], i) && j < 3) {
@@ -67,6 +67,7 @@ function infoWindow(i) {
     });
   }
   return infoWindows[i];
+*/
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
