@@ -92,10 +92,10 @@ describe Event do
     before(:each) do
       @event2 = FactoryGirl.build(:event2)
       @event.save
+      expect(@event2).to be_invalid
     end
     
     it "does not allow venue address + event name + event date/time to be case-insensitive duplicated" do
-      expect(@event2).to be_invalid
       @event2.name = @event.name.upcase
       @event2.address = @event.address.upcase
       expect(@event2).to be_invalid
