@@ -17,11 +17,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: gitguide_development
+  database: beccasmap_development
   pool: 5
   username: postgres
   password: Zozo2Kx$
-#  password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -47,16 +46,15 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: gitguide_test
+  database: beccasmap_test
   pool: 5
   username: postgres
   password: Zozo2Kx$
-#  password:
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: gitguide_production
+  database: beccasmap_production
   pool: 5
 #  username: postgres
   password:
