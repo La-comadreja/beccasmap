@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Gitguide::Application.load_tasks
+Beccasmap::Application.load_tasks

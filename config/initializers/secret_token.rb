@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Gitguide::Application.config.secret_key_base = 'a65acb047b9a6575c19830b1b481f6ed7bbbede0fc237b1c75b4bf8a028013397f1f085f1017fc3f750f869621e81053c5b7317fc67c8e6af623c7304f5cf91d'
+Beccasmap::Application.config.secret_key_base = 'a65acb047b9a6575c19830b1b481f6ed7bbbede0fc237b1c75b4bf8a028013397f1f085f1017fc3f750f869621e81053c5b7317fc67c8e6af623c7304f5cf91d'

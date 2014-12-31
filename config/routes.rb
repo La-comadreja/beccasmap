@@ -1,4 +1,4 @@
-Gitguide::Application.routes.draw do
+Beccasmap::Application.routes.draw do
   get "home/locations"
   get "home/index"
   # The priority is based upon order of creation: first created -> highest priority.
