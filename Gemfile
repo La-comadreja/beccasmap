@@ -10,6 +10,7 @@ gem 'gon'
 gem 'nokogiri'
 gem 'protected_attributes'
 gem 'rails_12factor'
+gem 'whenever', :require => false
 
 # Use pg as the database for Active Record
 gem 'pg'
