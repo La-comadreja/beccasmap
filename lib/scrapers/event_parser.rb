@@ -20,40 +20,43 @@ module Scrapers
   NJ = "New Jersey"
   NY = "New York"
 
-  def self.add_city_state_nycarea(location)
-    addr = location.split(LOCATION_SPLIT)
-    if addr.length > 1
-      city = addr.last.strip
-      if city.include? BRONX or city.include? BROOKLYN or city.include? STATEN_ISLAND
+  class EventParser
+    def self.add_city_state_nycarea(location)
+      addr = location.split(LOCATION_SPLIT)
+      if addr.length > 1
+        city = addr.last.strip
+        if city.include? BRONX or city.include? BROOKLYN or city.include? STATEN_ISLAND
+          state = NY
+        elsif city.include? QUEENS or city.include? JAMAICA or city.include? LONG_ISLAND_CITY
+          state = NY
+        elsif city.include? HUNTER
+          state = NY
+        elsif city.include? HOBOKEN or city.include? JERSEY_CITY
+          state = NJ
+        else
+          state = "#{MANHATTAN}, #{NY}"
+        end
+      elsif addr.first.strip.casecmp(TO_BE_DECIDED) == 0 or addr.first.strip.casecmp(TBD) == 0
+        return nil
+      elsif addr.first.include? HUNTER
         state = NY
-      elsif city.include? QUEENS or city.include? JAMAICA or city.include? LONG_ISLAND_CITY
-        state = NY
-      elsif city.include? HUNTER
-        state = NY
-      elsif city.include? HOBOKEN or city.include? JERSEY_CITY
-        state = NJ
       else
         state = "#{MANHATTAN}, #{NY}"
       end
-    elsif addr.first.strip.casecmp(TO_BE_DECIDED) == 0 or addr.first.strip.casecmp(TBD) == 0
-      return nil
-    elsif addr.first.include? HUNTER
-      state = NY
-    else
-      state = "#{MANHATTAN}, #{NY}"
+      "#{location.strip}, #{state}"
     end
-    "#{location.strip}, #{state}"
-  end
 
-  def self.datetime_no_year(section)
-    datetime = DateTime.parse(section)
-    datetime += 1.year if datetime.mon < Date.current.mon
-    datetime
-  end
+    def self.datetime_noyr(section, timezone)
+      Time.zone = timezone
+      datetime = DateTime.parse(section)
+      datetime += 1.year if datetime.mon < Time.zone.now.mon
+      datetime
+    end
 
-  def self.price_one_currency(section)
-    price = section.text.gsub(/\D/,'').to_f
-    price = nil if price == 0 and section.text.strip.casecmp(FREE) != 0
-    price
+    def self.price_one_currency(section)
+      price = section.text.gsub(/[^\d\.]/,'').to_f
+      price = nil if price == 0 and section.text.strip.casecmp(FREE) != 0
+      price
+    end
   end
 end

@@ -9,6 +9,7 @@ module Scrapers
       COL_KEY = "td"
       DATE_FINDER = "flarger"
       DESC_FINDER = "fsmall"
+      EST = "America/New_York"
       FONT_KEY = "font"
       HREF_KEY = "href"
       NAME_KEY = "a"
@@ -24,14 +25,17 @@ module Scrapers
         sections = page.css("div.boxx table table[width=\"100%\"] tr")
         sections.each do |section|
           event = Event.new
-          date = parse(section, event)
+          new_date = parse(section, event)
+          date = new_date if new_date
           name_link = section.css(NAME_KEY)
           event.name = name_link.text
           event.link = name_link.first[HREF_KEY] if name_link.length > 0
           event.category = CATEGORY_TECHNOLOGY
           section.css(COL_KEY).each do |col|
-            event.datetime = Scrapers.datetime_no_year("#{date} #{col.text} EST") if col[WID_KEY] == WID_TIME
-            event.price = Scrapers.price_one_currency(col) if col[WID_KEY] == WID_PRICE
+            if col[WID_KEY] == WID_TIME
+              event.datetime = Scrapers::EventParser.datetime_noyr("#{date} #{col.text} EST",EST)
+            end
+            event.price = Scrapers::EventParser.price_one_currency(col) if col[WID_KEY] == WID_PRICE
           end
           event.save
         end
@@ -47,7 +51,9 @@ module Scrapers
           when VENUE_FINDER
             location = field.text.split(LOCATION_SPLIT, 2)
             event.venue = location.first.strip
-            event.address = Scrapers.add_city_state_nycarea(location.last.strip) if location.length > 1
+            if location.length > 1
+              event.address = Scrapers::EventParser.add_city_state_nycarea(location.last.strip)
+            end
           when DESC_FINDER
             event.description = field.text
           end
