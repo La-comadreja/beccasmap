@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 1.day, :at => '12:30 am' do
+every :day, at: ['12:30am','10:30am'] do
   runner "Scrapers::Technology::GarysGuide.scrape"
 end
