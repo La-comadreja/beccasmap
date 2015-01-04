@@ -19,17 +19,11 @@ ActiveRecord::Schema.define(version: 20141219031946) do
     t.string   "name"
     t.string   "venue"
     t.string   "address"
+    t.decimal  "latitude"
+    t.decimal  "longitude"
     t.string   "link"
     t.decimal  "price"
     t.text     "description"
-  end
-
-  create_table "homes", force: true do |t|
-    t.text     "html"
-    t.boolean  "lastview_changed_at"
-    t.datetime "lastview"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end

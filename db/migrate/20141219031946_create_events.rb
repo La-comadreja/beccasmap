@@ -6,6 +6,8 @@ class CreateEvents < ActiveRecord::Migration
       t.string :name
       t.string :venue
       t.string :address
+      t.decimal :latitude
+      t.decimal :longitude
       t.string :link
       t.decimal :price
       t.text :description
