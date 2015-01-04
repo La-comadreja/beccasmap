@@ -1,103 +1,102 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
-      #map-canvas { height: 100%; overflow: auto; }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script>
-var map;
-var geocoder;
-var markers = [];
-//var infoWindows = new Array(gon.locs.length);
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<style type="text/css">
+	html { height: 100% }
+	body {
+		background:#eeeedd;
+		height:100%;
+		margin:0;
+		padding:0;
+		overflow:hidden;
+	}
+	#map-container {
+		height:100%;
+		margin-top:80px;
+	}
+	#map-canvas { height: 100%; overflow: auto; }
+	</style>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script>
+	var map;
+	var geocoder;
+	var markers = [];
+	//var infoWindows = new Array(gon.locs.length);
 
-function initialize() {
-  geocoder = new google.maps.Geocoder();
-  var mapOptions = {
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-  new google.maps.TransitLayer().setMap(map);
-  var defaultBounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng(40.7, -73.984),
-    new google.maps.LatLng(40.765, -73.984));
-  map.fitBounds(defaultBounds);
-/*
-  for (var i = 0; i < gon.locs.length; i++) {
-    var j = 0;
-    while (!codeAddress(gon.locs[i], i) && j < 3) {
-       j++;
-    }
-  }
-}
+	function initialize() {
+		geocoder = new google.maps.Geocoder();
+		var mapOptions = {
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+		new google.maps.TransitLayer().setMap(map);
+		var defaultBounds = new google.maps.LatLngBounds(
+			new google.maps.LatLng(40.68, -73.984),
+			new google.maps.LatLng(40.77, -73.984));
+			map.fitBounds(defaultBounds);
+			/*
+			for (var i = 0; i < gon.locs.length; i++) {
+			var j = 0;
+			while (!codeAddress(gon.locs[i], i) && j < 3) {
+			j++;
+			}
+			}
+			}
 
-function codeAddress(address, i) {
-  geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-      });
-      google.maps.event.addListener(marker, 'click', function() {
-        infoWindow(i).open(map, marker);
-      });
-    }
-    else {
-      if (status == "OVER_QUERY_LIMIT") {
-        setTimeout(function(){ codeAddress(address, i); }, 2013);
-        return status == google.maps.GeocoderStatus.OK;
-      }
-    }
-  });
-  return true;
-}
+			function codeAddress(address, i) {
+			geocoder.geocode( { 'address': address}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+			var marker = new google.maps.Marker({
+			map: map,
+			position: results[0].geometry.location
+			});
+			google.maps.event.addListener(marker, 'click', function() {
+			infoWindow(i).open(map, marker);
+			});
+			}
+			else {
+			if (status == "OVER_QUERY_LIMIT") {
+			setTimeout(function(){ codeAddress(address, i); }, 2013);
+			return status == google.maps.GeocoderStatus.OK;
+			}
+			}
+			});
+			return true;
+			}
 
-function infoWindow(i) {
-  if (!infoWindows[i]) {
-    var contentString = '<div id="content">'+
-        gon.info[i]+
-        '</div>';
-    infoWindows[i] = new google.maps.InfoWindow({
-        content: contentString
-    });
-  }
-  return infoWindows[i];
-*/
-}
+			function infoWindow(i) {
+			if (!infoWindows[i]) {
+			var contentString = '<div id="content">'+
+			gon.info[i]+
+			'</div>';
+			infoWindows[i] = new google.maps.InfoWindow({
+			content: contentString
+			});
+			}
+			return infoWindows[i];
+			*/
+		}
 
-google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+		google.maps.event.addDomListener(window, 'load', initialize);
+		</script>
 
-<script>
-  //For Google Analytics tracking
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		<script>
+		//For Google Analytics tracking
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-46119207-1', 'beccasmap.com');
-  ga('send', 'pageview');
+		ga('create', 'UA-46119207-1', 'beccasmap.com');
+		ga('send', 'pageview');
 
-</script>
-  </head>
-  <body>
-    <div class="topmenubar" style="position:relative;background:maroon;height:40px;">
-      <div id="menupadding" style="position:relative;top:3px;left:30px;right:30px;">
-        <table style="width:100%;">
-          <tr>
-            <font class="headerfont">
-              <td>B<small>ECCAS</small>M<small>AP.COM</small></td>
-              <td style="text-align:right;position:relative;right:60px;white-space:nowrap;overflow:hidden;text-overflow:hidden;">B<small>EST</small> <small>UPCOMING</small> T<small>ECH</small> <small>EVENTS</small> <small>IN</small> NYC</td>
-            </font>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div id="map-canvas"></div>
-  </body>
+		</script>
+	</head>
+	<body>
+		<div id="map-container">
+			<div id="map-canvas"></div>
+		</div>
+	</body>
 </html>
